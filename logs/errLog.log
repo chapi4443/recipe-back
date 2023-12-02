@@ -1,0 +1,71 @@
+20231018	08:34:53	49ffec17-1432-4202-affc-05b46ea91dc7	Error: Invalid Credentials	POST	/api/v1/auth/login	undefined
+20231023	16:07:45	31d3e04a-a83c-4a97-a529-568256ccf319	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:11:49	6e1671da-3788-4c4e-b357-791d4f72ac19	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:12:08	cb867252-5be7-47d1-a466-ceb483d754d3	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:12:21	5c823ca3-8843-441a-b12b-4b4672a1f294	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:12:34	fde8f3b5-c519-4fb3-abb5-d57cceca04c3	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:12:44	596a4038-db16-4843-9b59-9d65a4c84f1e	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:12:51	bae72723-7ef4-41af-82c6-040d0380154e	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:13:06	6ad5470d-ece3-43f7-8c47-5cca0072672e	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:13:38	b8425204-6f7e-4ee4-ad46-75cb712f7411	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:14:28	846f1662-cd36-4245-a49a-6a66d39af5f4	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:14:58	dafe9a1b-6c1a-4016-818c-e1443aea4301	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:15:37	a9f45d51-0c77-4a54-a34e-3fd0f6f1d955	Error: Invalid Credentials-password	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:16:06	676af038-6855-47a9-844a-fc3dd81b6cb8	Error: Invalid Credentials	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:16:39	6c596cb2-e7f3-478f-8de1-cf8d2082c0c0	Error: Invalid Credentials-password	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:18:21	606593dd-a92b-4931-9a48-8561efd86194	Error: Invalid Credentials-password	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:27:08	d0ec7374-9f43-4850-8126-b541e873b0ad	Error: Please provide email and password	POST	/api/v1/auth/login	http://localhost:3000
+20231023	16:28:56	e2e649c3-5bc4-471b-844f-5371a6fd081d	Error: Invalid Credentials-password	POST	/api/v1/auth/login	http://localhost:3000
+20231024	14:39:51	69e6feff-d0b6-4f50-b4b4-adb9363da44a	Error: Invalid Credentials	POST	/api/v1/auth/login	http://localhost:3000
+20231024	23:30:02	ac826a87-af2b-4e48-bb46-b93f31bb3881	TypeError: Cannot destructure property 'email' of 'formData' as it is undefined.	POST	/api/v1/auth/register	undefined
+20231027	09:09:42	0eda562f-4b61-4c52-9f26-62c6ba4e264a	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:09:42	c793596b-9d88-49a0-8911-978b898f06f1	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:09:46	e6556b13-005e-48fb-bd4e-da53acfcd97c	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:09:46	4d528599-1a55-4efd-8204-a6fe66f3333e	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:09:47	c99d244c-bb8e-4fd3-8b3d-6e3e27e1b3d4	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:09:48	15b778ba-8c5e-4695-87ee-5c031c93ffb7	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:14:02	bc961459-cce2-47f1-a795-8f142317ca25	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:14:03	c15093a2-cd9f-4366-b4cb-f9f4515144e1	TypeError: checkPermissions is not a function	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:22:35	db0a0bab-8320-4127-b9bc-c49ef37f4720	MongoServerSelectionError: connection <monitor> to 34.198.165.26:27017 timed out	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:22:37	bb086085-9d00-4525-8a89-4c136d3dab37	MongoServerSelectionError: connection <monitor> to 34.198.165.26:27017 timed out	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	09:23:32	26a0ff69-1c86-4da9-9d51-b6cae49212b1	MongoServerSelectionError: getaddrinfo ENOTFOUND ac-svoxdub-shard-00-00.j71kid8.mongodb.net	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	10:49:39	1c00eaa6-7751-48f5-91a9-f16fccd7d958	SyntaxError: Unexpected token " in JSON at position 0	POST	/api/v1/users/updateuser	http://localhost:3000
+20231027	10:49:39	ee1dbcd0-0c45-40ec-b317-fedbf6985580	SyntaxError: Unexpected token " in JSON at position 0	POST	/api/v1/users/updateuser	http://localhost:3000
+20231027	10:55:49	dea3969c-5aa9-4e5d-8a3e-75fe5034cc50	Error: Please provide all values	PATCH	/api/v1/users/updateuser	http://localhost:3000
+20231027	10:56:14	7dbab104-bacc-415e-89ea-781c8693658f	Error: Please provide all values	PATCH	/api/v1/users/updateuser	http://localhost:3000
+20231027	10:57:19	4fdfea60-4c37-41ad-a284-029110485553	MongoServerSelectionError: getaddrinfo ENOTFOUND ac-svoxdub-shard-00-00.j71kid8.mongodb.net	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	10:57:25	58d18fd3-30d0-42c8-b0cc-d220c2f17467	MongoServerSelectionError: getaddrinfo ENOTFOUND ac-svoxdub-shard-00-00.j71kid8.mongodb.net	GET	/api/v1/users/65367c1e103fa6b3b2305e30	http://localhost:3000
+20231027	11:02:48	5cd67e29-c3dd-4263-90f5-457d1a77f871	Error: Please provide all values	PATCH	/api/v1/users/updateuser	http://localhost:3000
+20231027	11:04:14	91c70a14-9728-44ff-a531-00ed587e1b88	Error: Please provide all values	PATCH	/api/v1/users/updateuser	http://localhost:3000
+20231029	02:32:41	e42db406-abb2-41c3-b2c2-93c4eea51f33	Error: Cannot find module 'nodemailer'
+Require stack:
+- C:\Users\HP\Desktop\React\neuro_test\controllers\authController.js
+- C:\Users\HP\Desktop\React\neuro_test\routes\authRoutes.js
+- C:\Users\HP\Desktop\React\neuro_test\app.js	POST	/api/v1/auth/forgot-password	http://localhost:3000
+20231029	02:34:22	15546f6f-8dc6-4137-b9f9-ab5c5281e681	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/forgot-password	http://localhost:3000
+20231029	02:35:06	e8c50af9-8d7a-45df-8b41-1e333508d440	TypeError: Cannot destructure property 'email' of 'data' as it is undefined.	POST	/api/v1/auth/forgot-password	http://localhost:3000
+20231029	02:36:36	1dcd875a-bb49-4676-9bbb-64b9e3232593	Error: Cannot find module 'nodemailer'
+Require stack:
+- C:\Users\HP\Desktop\React\neuro_test\controllers\authController.js
+- C:\Users\HP\Desktop\React\neuro_test\routes\authRoutes.js
+- C:\Users\HP\Desktop\React\neuro_test\app.js	POST	/api/v1/auth/forgot-password	undefined
+20231029	03:19:38	8b734258-ce77-4dcb-9094-7a4764a9e81c	TypeError: Cannot destructure property 'email' of 'formData' as it is undefined.	POST	/api/v1/auth/register	http://localhost:3000
+20231029	03:20:49	0c01192c-50cd-44d4-8a71-e690d9f41299	TypeError: Cannot destructure property 'email' of 'formData' as it is undefined.	POST	/api/v1/auth/register	http://localhost:3000
+20231201	16:36:22	85b8403f-50f2-4d00-9bdc-bc4a486b68cc	SyntaxError: Unexpected token } in JSON at position 123	POST	/api/v1/auth/register	undefined
+20231202	07:05:28	a5e260e5-e88a-46ba-9455-59bc24eb5731	Error: ENOENT: no such file or directory, open 'C:\Users\hp\Desktop\projects\Recipe managment\recipe_backend\public\uploads\Screenshot (4).png'	POST	/api/v1/recipe/create	undefined
+20231202	07:09:43	188a5272-b848-49fc-a229-f6a696b43cad	Error: ENOENT: no such file or directory, open 'C:\Users\hp\Desktop\projects\Recipe managment\recipe_backend\public\uploads\Screenshot_(4).png'	POST	/api/v1/recipe/create	undefined
+20231202	07:16:03	2509c15e-b934-479f-83f4-cc3b33e587da	Error: ENOENT: no such file or directory, open 'C:\Users\hp\Desktop\projects\Recipe managment\recipe_backend\public\uploads\Screenshot_(4).png'	POST	/api/v1/recipe/create	undefined
+20231202	07:17:38	4d88843d-1a4e-4cb2-ab07-b873950c5276	Error: ENOENT: no such file or directory, open 'C:\Users\hp\Desktop\projects\Recipe managment\recipe_backend\public\uploads\Screenshot__4_.png'	POST	/api/v1/recipe/create	undefined
+20231202	07:19:18	37baecd1-6ff4-42c1-9c50-5c9a10c2c3b3	Error: ENOENT: no such file or directory, open 'C:\Users\hp\Desktop\projects\Recipe managment\recipe_backend\public\uploads\Screenshot__4_.png'	POST	/api/v1/recipe/create	undefined
+20231202	07:23:13	c602b159-6c05-425b-ab07-91c31b700bbe	Error: ENOENT: no such file or directory, open 'C:\Users\hp\Desktop\projects\Recipe managment\recipe_backend\public\uploads\Screenshot__4_.png'	POST	/api/v1/recipe/create	undefined
+20231202	07:38:59	2fca84be-b3d6-4337-a099-9d6ac74a1e51	ReferenceError: CustomError is not defined	POST	/api/v1/recipe/uploadimage	undefined
+20231202	07:44:29	ed5b5019-c6cd-4f8b-9f07-aa0654f75870	ReferenceError: CustomError is not defined	POST	/api/v1/recipe/uploadimage	undefined
+20231202	11:45:52	f8f918e0-0706-41df-b88c-03105bf915db	Error: No product with id : 656aeafca5f6f17048393aa6	POST	/api/v1/review	undefined
+20231202	11:49:56	0d1bc274-5774-4b04-bb0a-86d688c684d3	Error: Already submitted review for this product	POST	/api/v1/review	undefined
+20231202	11:51:30	c0041f31-9b8d-478b-be5d-3b4aee6372dc	Error: No review with id 656aee56b212263545f05f57	DELETE	/api/v1/review/656aee56b212263545f05f57	undefined
+20231202	11:52:12	e209549a-3bd1-4081-a588-5b8d977edd54	Error: Already submitted review for this product	POST	/api/v1/review	undefined
+20231202	13:11:28	da09046d-e944-4cdd-a8b8-dc04b9b3ff95	MongoServerError: E11000 duplicate key error collection: test.reviews index: service_1_user_1 dup key: { service: null, user: ObjectId('656aeefbb212263545f05f66') }	POST	/api/v1/review	undefined
+20231202	13:14:53	16dd1ed7-99ad-403e-ae36-8663c12d508c	Error: No product with id : 656b02b599b12a21ccd9f5ac	POST	/api/v1/review	undefined
+20231202	16:55:50	49d0d458-55f9-4638-95c6-2581d184d784	ValidationError: Product validation failed: cal: Path `cal` is required., minutes: Path `minutes` is required., name: Please provide recipe name	POST	/api/v1/recipe	undefined
+20231202	16:58:49	f694e77a-e47e-478a-b5c3-820e14c3693a	CastError: Cast to ObjectId failed for value "getallrecipes" (type string) at path "_id" for model "Product"	GET	/api/v1/recipe/getallrecipes	undefined
+20231202	17:01:02	5b8d32aa-a8e8-4088-9290-e5f97ab576d8	MongoServerError: E11000 duplicate key error collection: test.reviews index: service_1_user_1 dup key: { service: null, user: ObjectId('656aeefbb212263545f05f66') }	POST	/api/v1/review	undefined
