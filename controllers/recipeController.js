@@ -1,5 +1,6 @@
 const Product = require("../models/recipe");
 const Like = require("../models/like");
+const Comment = require("../models/comment");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const path = require("path");
