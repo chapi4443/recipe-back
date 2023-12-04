@@ -16,14 +16,14 @@ const createRecipe = async (req, res) => {
 
     // Extract fields from the request body
     const {
-      // name,
-      // ingredients,
-      // preparationSteps,
-      // description,
-      // categories,
-      // minutes,
-      // cal,
-      data
+      name,
+      ingredients,
+      preparationSteps,
+      description,
+      categories,
+      minutes,
+      cal,
+      
     } = req.body;
     console.log(data);
     const fileName = req.file.fileName;

@@ -44,6 +44,10 @@ preparationSteps: {
       type: Number,
       default: 0,
     },
+    like:{
+      type: Number,
+      default: 0,
+    },
     user: {
       type: mongoose.Types.ObjectId,
       ref: "User",
