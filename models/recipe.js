@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema(
       maxlength: [50, "Name can not be more than 50 characters"],
     },
     ingredients: {
-      type: String,
+      type: [String],
       required: true,
     },
     preparationSteps: {

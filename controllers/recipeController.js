@@ -4,19 +4,34 @@ const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const path = require("path");
 
-
-
 const createRecipe = async (req, res) => {
   try {
-    req.body.user = req.user.userId;
-    const recipe = new Product(req.body);
+    const {
+      name,
+      ingredients,
+      preparationSteps,
+      categories,
+      minutes,
+      cal,
+      image,
+      user,
+    } = req.body;
+    const recipe = new Product({
+      name,
+      ingredients,
+      preparationSteps,
+      categories,
+      minutes,
+      cal,
+      image,
+      user,
+    });
     await recipe.save();
     res.status(201).send(recipe);
   } catch (error) {
     res.status(400).send(error);
   }
 };
-
 
 const getAllRecipes = async (req, res) => {
   try {
@@ -151,7 +166,9 @@ const uploadImage = async (req, res) => {
     res.status(StatusCodes.OK).json({ message: "Image uploaded successfully" });
   } catch (error) {
     console.error("Error uploading image:", error);
-    res.status(error.status || 500).json({ error: error.message || "Internal Server Error" });
+    res
+      .status(error.status || 500)
+      .json({ error: error.message || "Internal Server Error" });
   }
 };
 
@@ -204,7 +221,6 @@ const likeProduct = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createRecipe,
   getAllRecipes,
@@ -212,10 +228,8 @@ module.exports = {
   updateRecipeById,
   deleteRecipeById,
   uploadImage,
-  likeProduct
+  likeProduct,
 };
-
-
 
 // const Recipe = require("../models/recipe");
 // const { StatusCodes } = require("http-status-codes");

@@ -3,8 +3,6 @@ const router = express.Router();
 
 const multer = require("multer");
 
-
-
 const productController = require("../controllers/recipeController");
 const {
   // createRecipe,
@@ -14,7 +12,7 @@ const {
   deleteRecipeById,
   uploadImage,
   createRecipe,
-  likeProduct
+  likeProduct,
 } = require("../controllers/recipeController");
 
 // const storage = multer.diskStorage({
@@ -35,10 +33,7 @@ const {
 
 const { getSingleProductReviews } = require("../controllers/reviewController");
 
-router
-  .route("/")
-  .post([authenticateUser], createRecipe)
-  .get(getAllRecipes);
+router.route("/").post(createRecipe).get(getAllRecipes);
 
 router.route("/uploadImage").post([authenticateUser], uploadImage);
 
@@ -49,7 +44,6 @@ router
   .delete([authenticateUser], deleteRecipeById);
 
 router.post("/:id/like", authenticateUser, likeProduct);
-
 
 router.route("/:id/reviews").get(getSingleProductReviews);
 
