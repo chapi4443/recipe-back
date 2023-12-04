@@ -57,14 +57,8 @@ const getAllRecipes = async (req, res) => {
 
       return {
         ...product.toObject(),
-        likes: {
-          details: likesDetails,
-          count: likesDetails.length,
-        },
-        comments: {
-          details: commentsDetails,
-          count: commentsDetails.length,
-        },
+        likes: likesDetails,
+        comments: commentsDetails,
       };
     });
 
@@ -141,15 +135,14 @@ const updateRecipeById = async (req, res) => {
   res.status(StatusCodes.OK).json({ product });
 };
 const deleteRecipeById = async (req, res) => {
-  const { id: productId } = req.params;
+  const productId = req.params;
+  console.log(productId);
+  const result = await Product.deleteOne({ _id: productId.id });
 
-  const product = await Product.findOne({ _id: productId });
-
-  if (!product) {
+  if (result.deletedCount === 0) {
     throw new CustomError.NotFoundError(`No product with id : ${productId}`);
   }
 
-  await product.remove();
   res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
 
@@ -277,7 +270,7 @@ module.exports = {
   deleteRecipeById,
   uploadImage,
   likeProduct,
-  createComment
+  createComment,
 };
 
 // const Recipe = require("../models/recipe");

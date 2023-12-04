@@ -92,3 +92,30 @@ Require stack:
 20231204	14:46:15	d1a16865-0ac0-4173-823c-4260748b7184	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	http://localhost:3000
 20231204	14:51:10	ddae4f46-c05c-4aa0-85a8-24c20f78f314	PayloadTooLargeError: request entity too large	POST	/api/v1/recipe/createRecipe	http://localhost:3000
 20231204	14:54:56	3e3252da-e0e6-452d-b059-2b8ad8e9b04f	PayloadTooLargeError: request entity too large	POST	/api/v1/recipe/createRecipe	http://localhost:3000
+20231204	17:54:41	621e8e01-4947-4925-9c9f-27069ada66e2	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:54:43	56d7f5ad-d68d-44fb-9035-d2c5af65e0df	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:54:50	10edf6f8-e00e-49c2-bf72-fd2b9ac81561	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:54:57	afb9bcf9-ea22-44fc-9cff-12a5e5a4480b	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:55:04	0c6d2a0f-8bc8-407c-8396-6991f9500077	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:55:19	b5cbb45b-2bb7-4b78-8277-5ee0834e723b	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:56:33	6b8ec47a-8a0e-4f1d-8d2a-3b3ab899157b	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:57:24	51441833-599d-4b34-bb5a-4a6d64467a03	Error: No product with id : undefined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:57:54	d2be9126-af3c-4d5e-ac6c-782bac8a0012	Error: No product with id : undefined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:58:24	eae679d3-9319-4e5c-9f9d-55af4957d7df	Error: No product with id : undefined	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
+20231204	17:59:07	0580508d-e736-488c-b40c-778a8b3ffeba	Error: No product with id : undefined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	17:59:53	11b88dee-9bbf-4ca0-9ec0-bd7e83391afc	Error: No product with id : undefined	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
+20231204	18:00:43	95de384c-2584-48c5-a9e7-81ae22c96a75	ReferenceError: productId is not defined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:01:12	07ef4c34-eccb-43da-b0f2-2bdcb1a0cae5	ReferenceError: productId is not defined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:03:21	b6eadb2d-61a1-4bc8-9560-b00c06ddfc15	Error: No product with id : undefined	DELETE	/api/v1/recipe/delete	http://localhost:3000
+20231204	18:04:45	51a41a00-8950-4902-99f7-4fb3c630a980	TypeError: product.remove is not a function	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:05:00	f06e056c-3f61-4360-9623-557c7fe16d5c	TypeError: product.remove is not a function	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
+20231204	18:05:15	d3d2b4cc-822a-4c2a-a382-51f0c40d810e	TypeError: product.remove is not a function	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
+20231204	18:06:41	35759d15-03a5-473a-97a1-5549a6a6f7b5	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/undefined	http://localhost:3000
+20231204	18:07:03	e7a0d5a6-4595-455b-a920-27af848bc6bf	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:07:47	b80638d4-d92e-4197-9dbc-1ccda4cf4c78	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:08:09	5ab2b57b-878a-41d1-a204-ae6170cc0381	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:08:27	28a748b3-be0d-40ae-84c8-b829bf3c981e	ReferenceError: id is not defined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:08:44	bb43e783-cd7c-4ef1-b04e-66400d622e61	ReferenceError: id is not defined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:09:27	9b9b43fc-3ae6-4282-b6ed-35e0125e2810	Error: No product with id : undefined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231204	18:10:15	bcadb7ca-7406-470f-84f3-69a2ead05388	Error: No product with id : undefined	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
+20231204	18:10:47	acc7740e-1578-45ba-a770-1c07399af4ab	CastError: Cast to ObjectId failed for value "{ id: '656dc850f80565ceaf4fcdeb' }" (type Object) at path "_id" for model "Product"	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
