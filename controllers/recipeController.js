@@ -22,15 +22,21 @@ const getAllRecipes = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate("reviews")
-      .populate({ path: "likes", select: "user" }); // Populate the likes field with user only
+      .populate({ path: "likes", select: "user" })
+      .populate({ path: "comments", select: "user" }); // Populate the comments field with user only
 
-    // Map through products and calculate the total likes for each product
-    const productsWithLikes = products.map((product) => {
+    // Map through products and calculate the total likes and comments for each product
+    const productsWithDetails = products.map((product) => {
       const likesDetails = product.likes.map((like) => ({
         _id: like._id,
         user: like.user,
         product: like.product,
-        // Add other properties if needed
+      }));
+
+      const commentsDetails = product.comments.map((comment) => ({
+        _id: comment._id,
+        user: comment.user,
+        product: comment.product,
       }));
 
       return {
@@ -39,36 +45,47 @@ const getAllRecipes = async (req, res) => {
           details: likesDetails,
           count: likesDetails.length,
         },
+        comments: {
+          details: commentsDetails,
+          count: commentsDetails.length,
+        },
       };
     });
 
     res
       .status(StatusCodes.OK)
-      .json({ products: productsWithLikes, count: products.length });
+      .json({ products: productsWithDetails, count: products.length });
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: error.message });
   }
 };
+
 const getSingleRecipes = async (req, res) => {
   try {
     const { id: productId } = req.params;
 
     const product = await Product.findOne({ _id: productId })
       .populate("reviews")
-      .populate({ path: "likes", select: "user" }); // Populate the likes field with user only
+      .populate({ path: "likes", select: "user" })
+      .populate({ path: "comments", select: "user" }); // Populate the comments field with user only
 
     if (!product) {
       throw new CustomError.NotFoundError(`No product with id : ${productId}`);
     }
 
-    // Include both detailed likes information and total count in the response
+    // Include both detailed likes and comments information, and total counts in the response
     const likesDetails = product.likes.map((like) => ({
       _id: like._id,
       user: like.user,
       product: like.product,
-      // Add other properties if needed
+    }));
+
+    const commentsDetails = product.comments.map((comment) => ({
+      _id: comment._id,
+      user: comment.user,
+      product: comment.product,
     }));
 
     const response = {
@@ -76,7 +93,11 @@ const getSingleRecipes = async (req, res) => {
         ...product.toObject(),
         likes: {
           details: likesDetails,
-          like: likesDetails.length,
+          count: likesDetails.length,
+        },
+        comments: {
+          details: commentsDetails,
+          count: commentsDetails.length,
         },
       },
     };
@@ -165,8 +186,8 @@ const uploadImage = async (req, res) => {
 
 const likeProduct = async (req, res) => {
   try {
-    const { id: productId } = req.params;
-    const userId = req.user.userId;
+    const { productId, userId } = req.body;
+    // const userId = req.user.userId;
 
     // Check if the user has already liked the product
     const existingLike = await Like.findOne({
@@ -211,7 +232,24 @@ const likeProduct = async (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
   }
 };
+const createComment = async (req, res) => {
+  try {
+    req.body.user = req.user.userId;
+    const comment = new Comment(req.body);
+    await comment.save();
 
+    // Add the comment to the product's comments
+    const product = await Product.findByIdAndUpdate(
+      req.body.product,
+      { $push: { comments: comment._id } },
+      { new: true }
+    );
+
+    res.status(StatusCodes.CREATED).json({ comment, product });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
+  }
+};
 
 module.exports = {
   createRecipe,
@@ -220,7 +258,8 @@ module.exports = {
   updateRecipeById,
   deleteRecipeById,
   uploadImage,
-  likeProduct
+  likeProduct,
+  createComment
 };
 
 

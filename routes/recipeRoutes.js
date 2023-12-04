@@ -14,19 +14,10 @@ const {
   deleteRecipeById,
   uploadImage,
   createRecipe,
-  likeProduct
+  likeProduct,
+  createComment
 } = require("../controllers/recipeController");
 
-// const storage = multer.diskStorage({
-//   destination: "./public/recipe", // Specify your desired destination folder
-//   filename: function (req, file, cb) {
-//     const fileName = file.originalname.toLocaleLowerCase().split(" ").join("-");
-//     console.log(fileName);
-//     cb(null, Date.now() + fileName);
-//   },
-// });
-// const upload = multer({ storage: storage });
-// router.post("/createRecipe", createRecipe);
 
 const {
   authenticateUser,
@@ -48,9 +39,9 @@ router
   .patch([authenticateUser], updateRecipeById)
   .delete([authenticateUser], deleteRecipeById);
 
-router.post("/:id/like", authenticateUser, likeProduct);
+router.post("/like", authenticateUser, likeProduct);
 
-
+router.post("/comments", authenticateUser, createComment);
 router.route("/:id/reviews").get(getSingleProductReviews);
 
 module.exports = router;
