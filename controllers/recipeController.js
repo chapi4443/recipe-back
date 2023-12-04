@@ -17,13 +17,25 @@ const createRecipe = async (req, res) => {
   }
 };
 
+
 const getAllRecipes = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate("reviews")
-      .populate("likes"); // Populate the likes virtual field
+      .populate({ path: "likes", select: "user" }); // Populate the likes field with user only
 
-    res.status(StatusCodes.OK).json({ products, count: products.length });
+    // Map through products and calculate the total likes for each product
+    const productsWithLikes = products.map((product) => {
+      const totalLikes = product.likes.length;
+      return {
+        ...product.toObject(),
+        likes: totalLikes,
+      };
+    });
+
+    res
+      .status(StatusCodes.OK)
+      .json({ products: productsWithLikes, count: products.length });
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -31,29 +43,37 @@ const getAllRecipes = async (req, res) => {
   }
 };
 
-
 const getSingleRecipes = async (req, res) => {
   try {
     const { id: productId } = req.params;
 
     const product = await Product.findOne({ _id: productId })
       .populate("reviews")
-      .populate("likes"); // Populate the likes virtual field
+      .populate({ path: "likes", select: "user" }); // Populate the likes field with user only
 
     if (!product) {
       throw new CustomError.NotFoundError(`No product with id : ${productId}`);
     }
 
-    // Calculate the total likes for the product
-    const totalLikes = product.likes.length;
+    // Include both detailed likes information and total count in the response
+    const likesDetails = product.likes.map((like) => ({
+      _id: like._id,
+      user: like.user,
+      product: like.product,
+      // Add other properties if needed
+    }));
 
-    res.status(StatusCodes.OK).json({
+    const response = {
       product: {
         ...product.toObject(),
-        likes: totalLikes,
+        likes: {
+          details: likesDetails,
+          like: likesDetails.length,
+        },
       },
-    });
-    
+    };
+
+    res.status(StatusCodes.OK).json(response);
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
