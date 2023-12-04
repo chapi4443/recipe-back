@@ -13,7 +13,10 @@ const {
   uploadImage,
   createRecipe,
   likeProduct,
+<<<<<<< HEAD
+=======
   createComment
+>>>>>>> c139428e0feaa1294a6fbd2c27261bdad29a236e
 } = require("../controllers/recipeController");
 
 
@@ -34,9 +37,9 @@ router
   .patch([authenticateUser], updateRecipeById)
   .delete([authenticateUser], deleteRecipeById);
 
-router.post("/:id/like", authenticateUser, likeProduct);
+router.post("/like", authenticateUser, likeProduct);
 
-
+router.post("/comments", authenticateUser, createComment);
 router.route("/:id/reviews").get(getSingleProductReviews);
 
 module.exports = router;
