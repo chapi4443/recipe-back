@@ -35,6 +35,7 @@ ReviewSchema.statics.calculateAverageRating = async function (productId) {
         _id: null,
         averageRating: { $avg: "$rating" },
         numOfReviews: { $sum: 1 },
+        like: { $sum: 1 },
       },
     },
   ]);
