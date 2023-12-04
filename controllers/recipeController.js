@@ -26,10 +26,19 @@ const getAllRecipes = async (req, res) => {
 
     // Map through products and calculate the total likes for each product
     const productsWithLikes = products.map((product) => {
-      const totalLikes = product.likes.length;
+      const likesDetails = product.likes.map((like) => ({
+        _id: like._id,
+        user: like.user,
+        product: like.product,
+        // Add other properties if needed
+      }));
+
       return {
         ...product.toObject(),
-        likes: totalLikes,
+        likes: {
+          details: likesDetails,
+          count: likesDetails.length,
+        },
       };
     });
 
@@ -42,7 +51,6 @@ const getAllRecipes = async (req, res) => {
       .json({ error: error.message });
   }
 };
-
 const getSingleRecipes = async (req, res) => {
   try {
     const { id: productId } = req.params;
