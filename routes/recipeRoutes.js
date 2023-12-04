@@ -5,7 +5,7 @@ const multer = require("multer");
 
 
 
-
+const productController = require("../controllers/recipeController");
 const {
   // createRecipe,
   getAllRecipes,
@@ -14,6 +14,7 @@ const {
   deleteRecipeById,
   uploadImage,
   createRecipe,
+  likeProduct
 } = require("../controllers/recipeController");
 
 const storage = multer.diskStorage({
@@ -46,6 +47,9 @@ router
   .get(getSingleRecipes)
   .patch([authenticateUser], updateRecipeById)
   .delete([authenticateUser], deleteRecipeById);
+
+router.post("/:id/like", authenticateUser, likeProduct);
+
 
 router.route("/:id/reviews").get(getSingleProductReviews);
 

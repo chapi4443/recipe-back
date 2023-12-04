@@ -1,115 +1,66 @@
 const Product = require("../models/recipe");
+const Like = require("../models/like");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const path = require("path");
 
 
+
 const createRecipe = async (req, res) => {
-  //  req.body.user = req.user.userId;
   try {
-    console.log("image", req.file);
-    console.log("body", req.body);
-    if (!req.file) {
-      return res
-        .status(400)
-        .json({ success: false, message: "No file uploaded" });
-    }
- 
-
-    // Extract fields from the request body
-    const {
-      name,
-      ingredients,
-      preparationSteps,
-      // description,
-      categories,
-      minutes,
-      cal,
-    } = req.body;
-    // console.log(data);
-    const fileName = req.file.fileName;
-    // Check if productId is provided in the request body
-    const productId = req.body.productId;
-
-    let product;
-
-    // Find the product by ID or create a new one
-    if (productId) {
-      product = await Product.findById(productId);
-
-      if (!product) {
-        throw new CustomError.NotFoundError("Product not found");
-      }
-
-      // Update the existing product details dynamically
-      const fieldsToUpdate = {
-        name,
-        ingredients,
-        preparationSteps,
-        description,
-        categories,
-        image: "http://localhost:5000" + "/recipe/" + fileName,
-        minutes,
-        cal,
-      };
-      Object.entries(fieldsToUpdate).forEach(([key, value]) => {
-        if (value !== undefined) {
-          product[key] = value;
-        }
-      });
-    } else {
-      // Create a new product
-      req.body.user = req.user.userId;
-      product = new Product(req.body);
-    }
-
-    // Move the image to the uploads directory
-    const imagePath = path.join(
-      __dirname,
-      "../public/uploads/" + `${productImage.name}`
-    );
-    await productImage.mv(imagePath);
-
-    // Update the product's image field
-    product.image = `/uploads/${productImage.name}`;
-    await product.save();
-
-    // Respond with success message
-    res.status(StatusCodes.OK).json({ message: "Recipe created with image" });
+    req.body.user = req.user.userId;
+    const recipe = new Product(req.body);
+    await recipe.save();
+    res.status(201).send(recipe);
   } catch (error) {
-    console.error("Error creating recipe with image:", error);
-    res
-      .status(error.status || 500)
-      .json({ error: error.message || "Internal Server Error" });
+    res.status(400).send(error);
   }
 };
 
-// const createRecipe = async (req, res) => {
-//   try {
-//     req.body.user = req.user.userId;
-//     const recipe = new Product(req.body);
-//     await recipe.save();
-//     res.status(201).send(recipe);
-//   } catch (error) {
-//     res.status(400).send(error);
-//   }
-// };
 const getAllRecipes = async (req, res) => {
-  const products = await Product.find({});
+  try {
+    const products = await Product.find({})
+      .populate("reviews")
+      .populate("likes"); // Populate the likes virtual field
 
-  res.status(StatusCodes.OK).json({ products, count: products.length });
-};
-const getSingleRecipes = async (req, res) => {
-  const { id: productId } = req.params;
-
-  const product = await Product.findOne({ _id: productId }).populate("reviews");
-
-  if (!product) {
-    throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+    res.status(StatusCodes.OK).json({ products, count: products.length });
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
   }
-
-  res.status(StatusCodes.OK).json({ product });
 };
+
+
+const getSingleRecipes = async (req, res) => {
+  try {
+    const { id: productId } = req.params;
+
+    const product = await Product.findOne({ _id: productId })
+      .populate("reviews")
+      .populate("likes"); // Populate the likes virtual field
+
+    if (!product) {
+      throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+    }
+
+    // Calculate the total likes for the product
+    const totalLikes = product.likes.length;
+
+    res.status(StatusCodes.OK).json({
+      product: {
+        ...product.toObject(),
+        likes: totalLikes,
+      },
+    });
+    
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+};
+
 const updateRecipeById = async (req, res) => {
   const { id: productId } = req.params;
 
@@ -184,6 +135,56 @@ const uploadImage = async (req, res) => {
   }
 };
 
+const likeProduct = async (req, res) => {
+  try {
+    const { id: productId } = req.params;
+    const userId = req.user.userId;
+
+    // Check if the user has already liked the product
+    const existingLike = await Like.findOne({
+      user: userId,
+      product: productId,
+    });
+
+    if (existingLike) {
+      // User has already liked the product, so unlike it
+      await Like.deleteOne({
+        user: userId,
+        product: productId,
+      });
+
+      // Decrement the like count in the Product model
+      const product = await Product.findByIdAndUpdate(
+        productId,
+        { $inc: { numOfLikes: -1 } },
+        { new: true }
+      );
+
+      res
+        .status(StatusCodes.OK)
+        .json({ product, message: "Product unliked successfully" });
+    } else {
+      // User hasn't liked the product, so like it
+      const like = new Like({ user: userId, product: productId });
+      await like.save();
+
+      // Increment the like count in the Product model
+      const product = await Product.findByIdAndUpdate(
+        productId,
+        { $inc: { numOfLikes: 1 } },
+        { new: true }
+      );
+
+      res
+        .status(StatusCodes.OK)
+        .json({ product, message: "Product liked successfully" });
+    }
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   createRecipe,
   getAllRecipes,
@@ -191,6 +192,7 @@ module.exports = {
   updateRecipeById,
   deleteRecipeById,
   uploadImage,
+  likeProduct
 };
 
 
