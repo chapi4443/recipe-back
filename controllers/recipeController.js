@@ -3,56 +3,102 @@ const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const path = require("path");
 
-const createProduct = async (req, res) => {
-  try {
-    // Extract data from the request body
-    const { name, ingredients, categories, minutes, cal } = req.body;
 
-    // Validate required fields
-    if (!name || !ingredients || !categories || !minutes || !cal) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Please provide all required fields",
-        });
+const createRecipe = async (req, res) => {
+  try {
+      console.log("image", req.file);
+      console.log("body", req.o);
+      if (!req.file) {
+        return res
+          .status(400)
+          .json({ success: false, message: "No file uploaded" });
+      }
+
+    // Extract fields from the request body
+    const {
+      // name,
+      // ingredients,
+      // preparationSteps,
+      // description,
+      // categories,
+      // minutes,
+      // cal,
+      data
+    } = req.body;
+    console.log(data);
+    const fileName = req.file.fileName;
+    // Check if productId is provided in the request body
+    const productId = req.body.productId;
+
+    let product;
+
+    // Find the product by ID or create a new one
+    if (productId) {
+      product = await Product.findById(productId);
+
+      if (!product) {
+        throw new CustomError.NotFoundError("Product not found");
+      }
+
+      // Update the existing product details dynamically
+      const fieldsToUpdate = {
+        name,
+        ingredients,
+        preparationSteps,
+        description,
+        categories,
+        image: "http://localhost:5000" + "/recipe/" + fileName,
+        minutes,
+        cal,
+      };
+      Object.entries(fieldsToUpdate).forEach(([key, value]) => {
+        if (value !== undefined) {
+          product[key] = value;
+        }
+      });
+    } else {
+      // Create a new product
+      req.body.user = req.user.userId;
+      product = new Product(req.body);
     }
 
-    // Construct the recipe object
-    const recipeData = {
-      name: name,
-      ingredients: ingredients,
-      image: req.file
-        ? "http://localhost:5000/api/v1" + "/recipe/" + req.file.filename
-        : "/uploads/default-image.jpg",
-      categories: categories,
-      minutes: minutes,
-      cal: cal,
-      averageRating: 0,
-      numOfReviews: 0,
-      user: req.user.userId, // Assuming userId is available in the request after authentication
-    };
+    // Move the image to the uploads directory
+    const imagePath = path.join(
+      __dirname,
+      "../public/uploads/" + `${productImage.name}`
+    );
+    await productImage.mv(imagePath);
 
-    // Create a new Recipe instance using the Recipe model
-    const newRecipe = new Product(recipeData);
+    // Update the product's image field
+    product.image = `/uploads/${productImage.name}`;
+    await product.save();
 
-    // Save the recipe to the database
-    const savedRecipe = await newRecipe.save();
-
-    return res.status(201).json({ success: true, recipe: savedRecipe });
+    // Respond with success message
+    res.status(StatusCodes.OK).json({ message: "Recipe created with image" });
   } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal Server Error" });
+    console.error("Error creating recipe with image:", error);
+    res
+      .status(error.status || 500)
+      .json({ error: error.message || "Internal Server Error" });
   }
 };
-const getAllProducts = async (req, res) => {
+
+// const createRecipe = async (req, res) => {
+//   try {
+//     req.body.user = req.user.userId;
+//     const recipe = new Product(req.body);
+//     await recipe.save();
+//     res.status(201).send(recipe);
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// };
+const getAllRecipes = async (req, res) => {
   const products = await Product.find({});
 
   res.status(StatusCodes.OK).json({ products, count: products.length });
 };
-const getSingleProduct = async (req, res) => {
+const getSingleRecipes = async (req, res) => {
   const { id: productId } = req.params;
 
   const product = await Product.findOne({ _id: productId }).populate("reviews");
@@ -63,7 +109,7 @@ const getSingleProduct = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ product });
 };
-const updateProduct = async (req, res) => {
+const updateRecipeById = async (req, res) => {
   const { id: productId } = req.params;
 
   const product = await Product.findOneAndUpdate({ _id: productId }, req.body, {
@@ -77,7 +123,7 @@ const updateProduct = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ product });
 };
-const deleteProduct = async (req, res) => {
+const deleteRecipeById = async (req, res) => {
   const { id: productId } = req.params;
 
   const product = await Product.findOne({ _id: productId });
@@ -89,38 +135,60 @@ const deleteProduct = async (req, res) => {
   await product.remove();
   res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
+
 const uploadImage = async (req, res) => {
-  if (!req.files) {
-    throw new CustomError.BadRequestError("No File Uploaded");
-  }
-  const productImage = req.files.image;
+  try {
+    if (!req.files) {
+      throw new CustomError.BadRequestError("No File Uploaded");
+    }
+    const productImage = req.files.image;
 
-  if (!productImage.mimetype.startsWith("image")) {
-    throw new CustomError.BadRequestError("Please Upload Image");
-  }
+    if (!productImage.mimetype.startsWith("image")) {
+      throw new CustomError.BadRequestError("Please Upload Image");
+    }
 
-  const maxSize = 1024 * 1024;
+    const maxSize = 1024 * 1024;
 
-  if (productImage.size > maxSize) {
-    throw new CustomError.BadRequestError(
-      "Please upload image smaller than 1MB"
+    if (productImage.size > maxSize) {
+      throw new CustomError.BadRequestError(
+        "Please upload an image smaller than 1MB"
+      );
+    }
+
+    // Assuming you have a productId parameter in the request body
+    const productId = req.body.productId;
+
+    // Find the product by ID
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      throw new CustomError.NotFoundError("Product not found");
+    }
+
+    // Move the image to the uploads directory
+    const imagePath = path.join(
+      __dirname,
+      "../public/uploads/" + `${productImage.name}`
     );
-  }
+    await productImage.mv(imagePath);
 
-  const imagePath = path.join(
-    __dirname,
-    "../public/uploads/" + `${productImage.name}`
-  );
-  await productImage.mv(imagePath);
-  res.status(StatusCodes.OK).json({ image: `/uploads/${productImage.name}` });
+    // Update the product's image field
+    product.image = `/uploads/${productImage.name}`;
+    await product.save();
+
+    res.status(StatusCodes.OK).json({ message: "Image uploaded successfully" });
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    res.status(error.status || 500).json({ error: error.message || "Internal Server Error" });
+  }
 };
 
 module.exports = {
-  createProduct,
-  getAllProducts,
-  getSingleProduct,
-  updateProduct,
-  deleteProduct,
+  createRecipe,
+  getAllRecipes,
+  getSingleRecipes,
+  updateRecipeById,
+  deleteRecipeById,
   uploadImage,
 };
 

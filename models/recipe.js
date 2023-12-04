@@ -8,20 +8,25 @@ const ProductSchema = new mongoose.Schema(
       required: [true, "Please provide recipe name"],
       maxlength: [50, "Name can not be more than 50 characters"],
     },
-    ingredients: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    ingredients: {
+      type: String,
+      required: true,
+    },
+preparationSteps: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
     image: {
       type: String,
       required: true,
     },
     categories: {
-      type: [String],
+      type:String,
+      required: true,
     },
     minutes: {
       type: Number,

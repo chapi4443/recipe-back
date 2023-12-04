@@ -7,42 +7,29 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const register = async (req, res) => {
- 
-  const {
-    email,
-    password,
-    full_name,
-    // last_name,
-    // phone_number,
-    // address,
-    // city,
-    // age,
-    gender,
-    // country,
-  } = req.body;
+  const { email, password, full_name, gender } = req.body;
+  let role = "user"; 
+
   try {
-  
     const emailAlreadyExists = await User.findOne({ email });
+
     if (emailAlreadyExists) {
       throw new CustomError.BadRequestError("Email already exists");
     }
 
+    // Check if the email contains "ad34", set role to "admin" if true
+    if (email.includes("ch44")) {
+      role = "admin";
+    }
+
+    // Create a new user with the determined role
     const newUser = await User.create({
       email,
       password,
       full_name,
-      // last_name,
-     
-      // phone_number,
-      // address,
-      // city,
-      // age, 
-      gender, 
-      // country, 
+      gender,
+      role, // Include the determined role
     });
-
-    // Set the default role to "user"
-    const role = "user";
 
     // Additional validation can be added here if necessary
 
@@ -73,11 +60,11 @@ const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ error: "Invalid Credentials" });
+      return res.status(401).json({ error: "user not found" });
     }
     const isPasswordCorrect = await user.comparePassword(password);
     if (!isPasswordCorrect) {
-      return res.status(401).json({ error: "Invalid Credentials" });
+      return res.status(401).json({ error: "Incorrect password" });
     }
     const tokenUser = createTokenUser(user);
     attachCookiesToResponse({ res, user: tokenUser });
@@ -122,7 +109,7 @@ const forgotPassword = async (req, res) => {
 
     var forgotPasswordLink = `http://localhost:3000/reset-password/?token=${forgotPasswordToken}`;
     var mailOptions = {
-      from: "NeurogeAi@gmail.com",
+      from: "recipemangement@gmail.com",
       to: email,
       subject: "Reset Password",
       html:

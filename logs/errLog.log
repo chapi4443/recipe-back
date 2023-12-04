@@ -69,3 +69,11 @@ Require stack:
 20231202	16:55:50	49d0d458-55f9-4638-95c6-2581d184d784	ValidationError: Product validation failed: cal: Path `cal` is required., minutes: Path `minutes` is required., name: Please provide recipe name	POST	/api/v1/recipe	undefined
 20231202	16:58:49	f694e77a-e47e-478a-b5c3-820e14c3693a	CastError: Cast to ObjectId failed for value "getallrecipes" (type string) at path "_id" for model "Product"	GET	/api/v1/recipe/getallrecipes	undefined
 20231202	17:01:02	5b8d32aa-a8e8-4088-9290-e5f97ab576d8	MongoServerError: E11000 duplicate key error collection: test.reviews index: service_1_user_1 dup key: { service: null, user: ObjectId('656aeefbb212263545f05f66') }	POST	/api/v1/review	undefined
+20231203	09:36:11	7f4c6632-07a5-40dd-a8b4-c11ef9b21ae9	Error: Unexpected end of form	POST	/api/v1/recipe	undefined
+20231203	12:42:30	1f0768ba-2f30-4d3b-9493-2829c2142500	Error: Unexpected end of form	POST	/api/v1/recipe	undefined
+20231203	13:27:56	2eae3dc8-ab5c-47e7-90de-e90a9550b1e0	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	undefined
+20231203	13:29:50	f3752c35-adbd-4ae1-9561-c3d693c6a372	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	undefined
+20231203	13:31:05	ea8dba8b-950e-4aa2-9de8-02e51039be08	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	undefined
+20231203	13:33:34	72e85d74-9558-4cd7-98c0-dd2787aa9641	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	undefined
+20231203	13:35:59	43df1257-b3fb-4557-bae9-1a5084751dd1	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	undefined
+20231203	13:40:40	ffb1dd84-8ebc-493f-91f5-6e74d08d2f9f	Error: Unexpected end of form	POST	/api/v1/recipe/createRecipe	undefined

@@ -1,37 +1,51 @@
 const express = require("express");
 const router = express.Router();
+
+const multer = require("multer");
+
+
+
+
+const {
+  // createRecipe,
+  getAllRecipes,
+  getSingleRecipes,
+  updateRecipeById,
+  deleteRecipeById,
+  uploadImage,
+  createRecipe,
+} = require("../controllers/recipeController");
+
+const storage = multer.diskStorage({
+  destination: "./public/recipe", // Specify your desired destination folder
+  filename: function (req, file, cb) {
+    const fileName = file.originalname.toLocaleLowerCase().split(" ").join("-");
+    console.log(fileName);
+    cb(null, Date.now() + fileName);
+  },
+});
+const upload = multer({ storage: storage });
+router.post("/createRecipe", upload.single("image"), createRecipe);
+
 const {
   authenticateUser,
   authorizePermissions,
 } = require("../middleware/authentication");
 
-
-
-const {
-  createProduct,
-  getAllProducts,
-  getSingleProduct,
-  updateProduct,
-  deleteProduct,
-  uploadImage,
-} = require("../controllers/recipeController");
-
 const { getSingleProductReviews } = require("../controllers/reviewController");
 
 router
   .route("/")
-  .post([authenticateUser], createProduct)
-  .get(getAllProducts);
+  .post([authenticateUser], upload.single("image"), createRecipe)
+  .get(getAllRecipes);
 
-router
-  .route("/uploadImage")
-  .post([authenticateUser, authorizePermissions("admin")], uploadImage);
+router.route("/uploadImage").post([authenticateUser], uploadImage);
 
 router
   .route("/:id")
-  .get(getSingleProduct)
-  .patch([authenticateUser, authorizePermissions("admin")], updateProduct)
-  .delete([authenticateUser, authorizePermissions("admin")], deleteProduct);
+  .get(getSingleRecipes)
+  .patch([authenticateUser], updateRecipeById)
+  .delete([authenticateUser], deleteRecipeById);
 
 router.route("/:id/reviews").get(getSingleProductReviews);
 
