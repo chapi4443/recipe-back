@@ -17,16 +17,16 @@ const {
   likeProduct
 } = require("../controllers/recipeController");
 
-const storage = multer.diskStorage({
-  destination: "./public/recipe", // Specify your desired destination folder
-  filename: function (req, file, cb) {
-    const fileName = file.originalname.toLocaleLowerCase().split(" ").join("-");
-    console.log(fileName);
-    cb(null, Date.now() + fileName);
-  },
-});
-const upload = multer({ storage: storage });
-router.post("/createRecipe", upload.single("image"), createRecipe);
+// const storage = multer.diskStorage({
+//   destination: "./public/recipe", // Specify your desired destination folder
+//   filename: function (req, file, cb) {
+//     const fileName = file.originalname.toLocaleLowerCase().split(" ").join("-");
+//     console.log(fileName);
+//     cb(null, Date.now() + fileName);
+//   },
+// });
+// const upload = multer({ storage: storage });
+// router.post("/createRecipe", createRecipe);
 
 const {
   authenticateUser,
@@ -37,7 +37,7 @@ const { getSingleProductReviews } = require("../controllers/reviewController");
 
 router
   .route("/")
-  .post([authenticateUser], upload.single("image"), createRecipe)
+  .post([authenticateUser], createRecipe)
   .get(getAllRecipes);
 
 router.route("/uploadImage").post([authenticateUser], uploadImage);
