@@ -19,7 +19,7 @@ const createRecipe = async (req, res) => {
       name,
       ingredients,
       preparationSteps,
-      description,
+      // description,
       categories,
       minutes,
       cal,
