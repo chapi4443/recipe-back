@@ -5,14 +5,16 @@ const path = require("path");
 
 
 const createRecipe = async (req, res) => {
+  //  req.body.user = req.user.userId;
   try {
-      console.log("image", req.file);
-      console.log("body", req.o);
-      if (!req.file) {
-        return res
-          .status(400)
-          .json({ success: false, message: "No file uploaded" });
-      }
+    console.log("image", req.file);
+    console.log("body", req.body);
+    if (!req.file) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No file uploaded" });
+    }
+ 
 
     // Extract fields from the request body
     const {
@@ -23,9 +25,8 @@ const createRecipe = async (req, res) => {
       categories,
       minutes,
       cal,
-      
     } = req.body;
-    console.log(data);
+    // console.log(data);
     const fileName = req.file.fileName;
     // Check if productId is provided in the request body
     const productId = req.body.productId;
