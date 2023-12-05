@@ -119,3 +119,9 @@ Require stack:
 20231204	18:09:27	9b9b43fc-3ae6-4282-b6ed-35e0125e2810	Error: No product with id : undefined	DELETE	/api/v1/recipe/[object%20Object]	http://localhost:3000
 20231204	18:10:15	bcadb7ca-7406-470f-84f3-69a2ead05388	Error: No product with id : undefined	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
 20231204	18:10:47	acc7740e-1578-45ba-a770-1c07399af4ab	CastError: Cast to ObjectId failed for value "{ id: '656dc850f80565ceaf4fcdeb' }" (type Object) at path "_id" for model "Product"	DELETE	/api/v1/recipe/656dc850f80565ceaf4fcdeb	http://localhost:3000
+20231205	09:20:44	96c363aa-9f9b-4a59-9f19-f0e7fcc18a4e	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	PATCH	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231205	09:20:51	90d75be7-4f88-4ee7-bee5-98ec5ee3f416	CastError: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "Product"	PATCH	/api/v1/recipe/[object%20Object]	http://localhost:3000
+20231205	09:23:17	49e32556-38cc-434a-8277-e0766977f190	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Product"	PATCH	/api/v1/recipe/undefined	http://localhost:3000
+20231205	09:24:12	02c68684-f5d0-4b43-b5da-4c26a7505a95	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Product"	PATCH	/api/v1/recipe/undefined	http://localhost:3000
+20231205	09:25:12	21b6d53b-3308-4e8b-9f2f-dc1f6c0ab754	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Product"	PATCH	/api/v1/recipe/undefined	http://localhost:3000
+20231205	09:25:46	06acc3ce-c040-4ff4-9dd2-5e4b7e7fedd9	CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Product"	PATCH	/api/v1/recipe/undefined	http://localhost:3000
