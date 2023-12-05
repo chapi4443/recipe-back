@@ -39,7 +39,7 @@ const getAllRecipes = async (req, res) => {
     const products = await Product.find({})
       .populate("reviews")
       .populate({ path: "likes", select: "user" })
-      .populate({ path: "comments", select: "user" }); // Populate the comments field with user only
+      .populate({ path: "comments", select: "user comment" }); // Populate the comments field with user and comment only
 
     // Map through products and calculate the total likes and comments for each product
     const productsWithDetails = products.map((product) => {
@@ -53,6 +53,7 @@ const getAllRecipes = async (req, res) => {
         _id: comment._id,
         user: comment.user,
         product: comment.product,
+        comment: comment.comment,
       }));
 
       return {
@@ -79,13 +80,13 @@ const getSingleRecipes = async (req, res) => {
     const product = await Product.findOne({ _id: productId })
       .populate("reviews")
       .populate({ path: "likes", select: "user" })
-      .populate({ path: "comments", select: "user" }); // Populate the comments field with user only
+      .populate({ path: "comments", select: "user comment" }); // Populate the comments field with user and comment only
 
     if (!product) {
       throw new CustomError.NotFoundError(`No product with id : ${productId}`);
     }
 
-    // Include both detailed likes and comments information, and total counts in the response
+    // Include both detailed likes and comments information in the response
     const likesDetails = product.likes.map((like) => ({
       _id: like._id,
       user: like.user,
@@ -96,19 +97,17 @@ const getSingleRecipes = async (req, res) => {
       _id: comment._id,
       user: comment.user,
       product: comment.product,
+      comment: comment.comment,
     }));
+
+    const suggestedComments = commentsDetails;
 
     const response = {
       product: {
         ...product.toObject(),
-        likes: {
-          details: likesDetails,
-          count: likesDetails.length,
-        },
-        comments: {
-          details: commentsDetails,
-          count: commentsDetails.length,
-        },
+        likes: likesDetails,
+        comments: commentsDetails,
+        suggestedComments,
       },
     };
 
@@ -119,6 +118,7 @@ const getSingleRecipes = async (req, res) => {
       .json({ error: error.message });
   }
 };
+
 
 const updateRecipeById = async (req, res) => {
   const { id: productId } = req.params;
